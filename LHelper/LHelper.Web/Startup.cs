@@ -28,7 +28,13 @@
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services
-                .AddIdentity<User, IdentityRole>()
+                .AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<LHelperDbContext>()
                 .AddDefaultTokenProviders();
             
@@ -57,6 +63,13 @@
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                  name: "areas",
+                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.UseMvc(routes =>
             {
