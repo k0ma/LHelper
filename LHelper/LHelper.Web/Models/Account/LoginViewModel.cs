@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace LHelper.Web.Models.Account
+﻿namespace LHelper.Web.Models.Account
 {
+    using System.ComponentModel.DataAnnotations;
+
+
     public class LoginViewModel
     {
         [Required]

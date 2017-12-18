@@ -10,7 +10,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Services;
+    using Web.Extensions;
 
     public class Startup
     {
@@ -38,9 +38,11 @@
                 .AddEntityFrameworkStores<LHelperDbContext>()
                 .AddDefaultTokenProviders();
             
-            services.AddTransient<IEmailSender, EmailSender>();
+            //services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddAutoMapper();
+
+            services.AddDomainServices();
 
             services.AddMvc();
         }

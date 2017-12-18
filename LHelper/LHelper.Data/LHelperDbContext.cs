@@ -18,6 +18,8 @@
 
         public DbSet<Replay> Replies { get; set; }
 
+        public DbSet<Role> Roles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
@@ -35,6 +37,22 @@
                 .HasOne(uc => uc.User)
                 .WithMany(u => u.Categories)
                 .HasForeignKey(uc => uc.UserId);
+
+            builder
+                .Entity<UserRole>()
+                .HasKey(ur => new { ur.UserId, ur.RoleId });
+
+            builder
+                .Entity<UserRole>()
+                .HasOne(ur => ur.User)
+                .WithMany(u => u.Roles)
+                .HasForeignKey(ur => ur.UserId);
+
+            builder
+                .Entity<UserRole>()
+                .HasOne(ur => ur.Role)
+                .WithMany(r => r.Users)
+                .HasForeignKey(ur => ur.RoleId);
 
             builder
                 .Entity<Topic>()
