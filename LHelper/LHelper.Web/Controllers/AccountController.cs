@@ -25,7 +25,7 @@
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IEmailSender emailSender,
+            //IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
             this.userManager = userManager;
@@ -56,9 +56,13 @@
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await signInManager.
+                    PasswordSignInAsync(
+                    model.Username, 
+                    model.Password, 
+                    model.RememberMe, 
+                    lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
                     logger.LogInformation("User logged in.");
