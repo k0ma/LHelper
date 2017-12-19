@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Replay\Controllers\" />
     <Folder Include="Areas\Replay\Data\" />
     <Folder Include="Areas\Replay\Models\" />
