@@ -5,6 +5,9 @@
         public const int CategoryTitleMinLength = 2;
         public const int CategoryTitleMaxLength = 50;
 
+
+        public const int CategoryDescriptionMaxLength = 2000;
+
         public const int UserNameMinLength = 2;
         public const int UserNameMaxLength = 100;
 

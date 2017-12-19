@@ -25,6 +25,10 @@ namespace LHelper.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2000);
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);

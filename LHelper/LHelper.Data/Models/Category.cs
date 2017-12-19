@@ -12,6 +12,11 @@
         [MinLength(DataConstants.CategoryTitleMinLength)]
         public string Name { get; set; }
 
+
+        [Required]
+        [MaxLength(DataConstants.CategoryDescriptionMaxLength)]
+        public string Description { get; set; }
+
         public List<Topic> Topics { get; set; } = new List<Topic>();
 
         public List<UserCategory> Trainers { get; set; } = new List<UserCategory>();
