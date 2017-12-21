@@ -34,8 +34,4 @@
     <ProjectReference Include="..\LHelper.Services\LHelper.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Forum\Data\" />
-  </ItemGroup>
-
 </Project>
