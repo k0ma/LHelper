@@ -1,16 +1,26 @@
 ﻿namespace LHelper.Web.Controllers
 {
-    using LHelper.Web.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Models;
+    using Models.Home;
+    using Services;
     using System.Diagnostics;
-
+    using System.Threading.Tasks;
 
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ICategoryService categories;
+
+        public HomeController(ICategoryService categories)
         {
-            return View();
+            this.categories = categories;
         }
+
+        public async Task<IActionResult> Index()
+            => View(new HomeIndexViewModel
+            {
+                Categories = await this.categories.AllAsyn()
+            });
 
 
         public IActionResult Error()

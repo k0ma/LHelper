@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -37,6 +40,11 @@
                         <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">Assign to role</a></li>
                         <li><a asp-area="Admin" asp-controller="Categories" asp-action="Create">Categories</a></li>
                     }
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a asp-area="Forum" asp-controller="Topics" asp-action="Create">Topic</a></li>
+                    }
+
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

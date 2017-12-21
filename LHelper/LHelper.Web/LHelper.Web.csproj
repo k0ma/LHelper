@@ -9,9 +9,14 @@
     <Compile Remove="Models\User.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="Areas\Admin\Views\Categories\Details.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+    <PackageReference Include="HtmlSanitizer" Version="4.0.181" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
@@ -30,14 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Replay\Controllers\" />
-    <Folder Include="Areas\Replay\Data\" />
-    <Folder Include="Areas\Replay\Models\" />
-    <Folder Include="Areas\Replay\Views\" />
-    <Folder Include="Areas\Topic\Controllers\" />
-    <Folder Include="Areas\Topic\Data\" />
-    <Folder Include="Areas\Topic\Models\" />
-    <Folder Include="Areas\Topic\Views\" />
+    <Folder Include="Areas\Forum\Data\" />
   </ItemGroup>
 
 </Project>

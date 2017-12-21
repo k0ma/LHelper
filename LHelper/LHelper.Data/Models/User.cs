@@ -18,8 +18,6 @@
 
         public List<UserCategory> Categories { get; set; } = new List<UserCategory>();
 
-        public List<Replay> Replies { get; set; } = new List<Replay>();
-
-        public List<UserRole> Roles { get; set; } = new List<UserRole>();
+        public List<Replay> Replies { get; set; } = new List<Replay>();        
     }
 }
