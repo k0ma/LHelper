@@ -62,18 +62,6 @@ namespace LHelper.Data.Migrations
                     b.ToTable("Replies");
                 });
 
-            modelBuilder.Entity("LHelper.Data.Models.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("LHelper.Data.Models.Topic", b =>
                 {
                     b.Property<int>("Id")
@@ -170,19 +158,6 @@ namespace LHelper.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserCategory");
-                });
-
-            modelBuilder.Entity("LHelper.Data.Models.UserRole", b =>
-                {
-                    b.Property<string>("UserId");
-
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -326,19 +301,6 @@ namespace LHelper.Data.Migrations
 
                     b.HasOne("LHelper.Data.Models.User", "User")
                         .WithMany("Categories")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("LHelper.Data.Models.UserRole", b =>
-                {
-                    b.HasOne("LHelper.Data.Models.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("LHelper.Data.Models.User", "User")
-                        .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
