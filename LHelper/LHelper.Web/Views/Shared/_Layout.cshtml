@@ -37,8 +37,17 @@
 
                     @if (User.IsInRole(WebConstants.AdministratorRole))
                     {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Categories
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-area="Admin" asp-controller="Categories" asp-action="All">All Categories</a></li>
+                                <li><a asp-area="Admin" asp-controller="Categories" asp-action="Create">Create Category</a></li>
+                            </ul>
+                        </li>
                         <li><a asp-area="Admin" asp-controller="Users" asp-action="Index">Assign to role</a></li>
-                        <li><a asp-area="Admin" asp-controller="Categories" asp-action="Create">Categories</a></li>
                     }
                     @if (SignInManager.IsSignedIn(User))
                     {
