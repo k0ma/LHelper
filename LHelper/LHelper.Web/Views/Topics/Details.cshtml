@@ -1,0 +1,52 @@
+﻿@inject SignInManager<User> SignInManager
+@model TopicDetailsViewModel
+@{
+    ViewData["Title"] = Model.Topic.Title;
+}
+
+<div class="row" style="margin-top:20px;">
+
+    <div class="col-md-8" style="margin-top:20px;">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @Model.Topic.User
+            </div>
+            <div class="panel-body">
+                <h4>@Model.Topic.Title</h4>
+                <p>@Html.Raw(Model.Topic.Description)</p>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-4">@Model.Topic.PublishDate</div>
+                    <div class="col-md-3">@Model.Topic.Category</div>
+                    <div class="col-md-3">Отговори: @Model.Topic.Replies</div>
+                    @if (SignInManager.IsSignedIn(User))
+            {
+                        <div class="col-md-2"><a asp-area="Forum" asp-controller="Replies" asp-action="Create" asp-route-id="@Model.Topic.Id" class="btn btn-primary">Replay</a></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row" style="margin-top:20px;">
+        @foreach (var replay in Model.Replies)
+        {
+            <div class="col-md-8" style="margin-left:50px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Replay: @replay.User
+                    </div>
+                    <div class="panel-body">
+                        <p>@Html.Raw(replay.Content)</p>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-4">@replay.PublishDate</div>
+                            <div class="col-md-2">@Model.Topic.Category</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

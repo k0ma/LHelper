@@ -1,0 +1,38 @@
+﻿@model PublishTopicFormModel
+<link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
+
+@{
+    ViewData["Title"] = "Publish Topic";
+}
+<h2>@ViewData["Title"]</h2>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control" id="editor-container" rows="10"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.CategoryId"></label>
+                <select asp-for="@Model.CategoryId" asp-items="@Model.Categories" class="form-control"></select>
+                <span asp-validation-for="@Model.Categories" class="form-text text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Publish Topic</button>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

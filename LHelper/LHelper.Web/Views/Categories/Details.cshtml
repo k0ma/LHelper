@@ -1,0 +1,45 @@
+﻿@model CategoryDetailsViewModel
+@inject SignInManager<User> SignInManager
+
+@{
+    ViewData["Title"] = $"{Model.Category.Name} Category";
+}
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <div class="alert alert-info">
+        <h4>You must be logged in to ask a question or create Topic</h4>
+    </div>
+}
+
+<h2>@ViewData["Title"]</h2>
+<h5>@Model.Category.Description</h5>
+<div class="row">
+    @foreach (var topic in Model.Topics)
+    {
+        <div class="well">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>
+                        Тема:
+                            <a asp-controller="Topics" asp-action="Details" asp-route-id="@topic.Id">
+                                @topic.Title
+                            </a>
+                    </h4>
+                </div>
+                <div class="col-md-2">                    
+                    <span>Публикувана от: @topic.User</span>
+                </div>
+                <div class="col-md-2">
+                    <span><em>@topic.PublishDate</em></span>
+                </div>
+                <div class="col-md-2">
+                    В категория: @Model.Category.Name
+                </div>
+                <div class="col-md-2">
+                    отговори: @topic.Replies
+                </div>
+            </div>            
+        </div>
+    }
+</div>

@@ -1,0 +1,27 @@
+﻿@model PublishReplayFormModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post">
+            <div class="form-group">
+                <input type="hidden" name="id" value="@Model.TopicId" />
+                <label asp-for="@Model.Content"></label>
+                <textarea asp-for="@Model.Content" class="form-control" id="editor-container" rows="10"></textarea>
+                <span asp-validation-for="@Model.Content" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Publish Replay</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+}
