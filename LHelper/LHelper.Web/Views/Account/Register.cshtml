@@ -1,6 +1,15 @@
 ﻿@model RegisterViewModel
+@inject SignInManager<User> SignInManager
+
 @{
     ViewData["Title"] = "Register";
+}
+
+@if (!SignInManager.IsSignedIn(User))
+{
+    <div class="alert alert-info">
+        <h4>You must be logged in to ask a question or create Topic</h4>
+    </div>
 }
 
 <h2>@ViewData["Title"]</h2>
