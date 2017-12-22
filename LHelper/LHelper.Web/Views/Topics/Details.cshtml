@@ -20,10 +20,7 @@
                     <div class="col-md-4">@Model.Topic.PublishDate</div>
                     <div class="col-md-3">@Model.Topic.Category</div>
                     <div class="col-md-3">Отговори: @Model.Topic.Replies</div>
-                    @if (SignInManager.IsSignedIn(User))
-            {
-                        <div class="col-md-2"><a asp-area="Forum" asp-controller="Replies" asp-action="Create" asp-route-id="@Model.Topic.Id" class="btn btn-primary">Replay</a></div>
-                    }
+                    <div class="col-md-2"><a asp-area="Forum" asp-controller="Replies" asp-action="Create" asp-route-id="@Model.Topic.Id" class="btn btn-primary">Replay</a></div>                    
                 </div>
             </div>
         </div>
