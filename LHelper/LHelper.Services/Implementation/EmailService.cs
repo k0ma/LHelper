@@ -4,6 +4,7 @@
     using MailKit.Net.Smtp;
     using MimeKit;
     using System.Linq;
+    using System.Threading.Tasks;
 
     class EmailService : IEmailService
     {
@@ -15,7 +16,7 @@
             this.db = db;
         }
 
-        public void SendEmails(int topicId, int categoryId, string url)
+        public async Task SendEmails(int topicId, int categoryId, string url)
         {
 
             var trainers = this.db.Users
@@ -56,14 +57,14 @@
 
                 using (var client = new SmtpClient())
                 {
-                    client.Connect("smtp.gmail.com", 587, false);
-                    client.Authenticate("lhelpersmtp@gmail.com", "lhelpersmtp2017");
-                    client.Send(message);
-                    client.Disconnect(false);
+                    await client.ConnectAsync("smtp.gmail.com", 587, false);
+                    await client.AuthenticateAsync("lhelpersmtp@gmail.com", "lhelpersmtp2017");
+                    await client.SendAsync(message);
+                    await client.DisconnectAsync(false);
                 }
             }
 
-            
+
         }
     }
 }

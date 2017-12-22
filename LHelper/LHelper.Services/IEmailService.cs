@@ -4,6 +4,6 @@
 
     public interface IEmailService
     {
-        void SendEmails(int topicId, int categoryId, string url);
+        Task SendEmails(int topicId, int categoryId, string url);
     }
 }
