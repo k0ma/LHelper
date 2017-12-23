@@ -1,0 +1,21 @@
+﻿@model PublishTopicFormModel
+
+@{
+    ViewData["Title"] = $"Edit Topic {Model.Title}";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<div class="row">
+    <div class="col-md-8">
+        @Html.Partial("_TopicForm.cshtml", Model)
+    </div>
+</div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
