@@ -1,7 +1,8 @@
 ﻿@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @model TopicDetailsViewModel
 @{
-    ViewData["Title"] = Model.Topic.Title;
+    ViewData["Title"] =$"{Model.Topic.Title}";
 }
 
 <div class="row" style="margin-top:20px;">
@@ -17,10 +18,17 @@
             </div>
             <div class="panel-footer">
                 <div class="row">
-                    <div class="col-md-4">@Model.Topic.PublishDate</div>
+                    <div class="col-md-2">@Model.Topic.PublishDate</div>
                     <div class="col-md-3">@Model.Topic.Category</div>
                     <div class="col-md-3">Отговори: @Model.Topic.Replies</div>
-                    <div class="col-md-2"><a asp-area="Forum" asp-controller="Replies" asp-action="Create" asp-route-id="@Model.Topic.Id" class="btn btn-primary">Replay</a></div>                    
+                    @if (User.IsInRole(WebConstants.TrainerRole) || User.IsInRole(WebConstants.AdministratorRole))
+                    {
+                        <div class="col-md-2">
+                            <a asp-area="Forum" asp-controller="Topics" asp-action="Edit" asp-route-id="@Model.Topic.Id" class="btn btn-primary">Edit Topic</a>
+                        </div>
+                    }
+
+                    <div class="col-md-2"><a asp-area="Forum" asp-controller="Replies" asp-action="Create" asp-route-id="@Model.Topic.Id" class="btn btn-primary">Replay</a></div>
                 </div>
             </div>
         </div>

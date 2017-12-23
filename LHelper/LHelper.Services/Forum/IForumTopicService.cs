@@ -11,5 +11,9 @@
         Task<IEnumerable<TopicBasicServiceModel>> ByCategoryIdAsync(int id);
 
         Task<TopicDetailsServiceModel> ByTopicIdAsync(int id);
+
+        Task<TopicEditServiceModel> ByIdForEditAsync(int id);
+
+        Task EditAsync(int id, string title, string description, int categoryId);
     }
 }

@@ -39,6 +39,18 @@
             return topics;
         }
 
+        public async Task<TopicEditServiceModel> ByIdForEditAsync(int id)
+            => await this.db
+                .Topics
+                .Where(t => t.Id == id)
+                .Select(t => new TopicEditServiceModel
+                {
+                    Title = t.Title,
+                    Description = t.Description
+                })
+                .FirstOrDefaultAsync();
+        
+
         public async Task<TopicDetailsServiceModel> ByTopicIdAsync(int id)
         {
             var topic = await this.db
@@ -89,6 +101,23 @@
             details.TopicId = topic.Id;
 
             return details;
+        }
+
+        public async Task EditAsync(int id, string title, string description, int categoryId)
+        {
+
+            var existingTopic = await this.db.Topics.FindAsync(id);
+
+            if (existingTopic == null)
+            {
+                return;
+            }
+
+            existingTopic.Title = title;
+            existingTopic.Description = description;
+            existingTopic.CategoryId = categoryId;
+
+            await this.db.SaveChangesAsync();
         }
     }
 }

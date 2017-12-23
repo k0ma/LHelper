@@ -60,8 +60,51 @@
             }
 
             return RedirectToAction("Send", "Emails",
-                        new { Area = "", topicId = details.TopicId, categoryId = model.CategoryId});
+                        new { Area = "", topicId = details.TopicId, categoryId = model.CategoryId });
         }
+
+        [Authorize(Roles = WebConstants.TrainerRole + "," + WebConstants.AdministratorRole)]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var topic = await this.topics.ByIdForEditAsync(id);
+
+            if (topic == null)
+            {
+                return NotFound();
+            }
+
+            var listOgCategories = await this.GetCategories();
+
+            return View(new PublishTopicFormModel
+            {
+                Title = topic.Title,
+                Description = topic.Description,
+                Categories = listOgCategories
+            });
+        }
+
+        [Authorize(Roles = WebConstants.TrainerRole + "," + WebConstants.AdministratorRole)]
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, PublishTopicFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                //model.ForEdit = true;
+                return View(model);
+            }
+
+            model.Description = this.html.Sanitize(model.Description);
+
+            await this.topics.EditAsync(
+                id,
+                model.Title,
+                model.Description,
+                model.CategoryId);
+
+            return RedirectToAction("Details", "Topics",
+                        new { Area = "", id = id });
+        }
+
 
         private async Task<IEnumerable<SelectListItem>> GetCategories()
         {

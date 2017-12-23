@@ -18,7 +18,7 @@
             var url = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}";
             
 
-            this.emails.SendEmails(topicId, categoryId, url);
+            await this.emails.SendEmails(topicId, categoryId, url);
 
             //var details = await this.topics.CreateAsync(model.Title, model.Description, model.CategoryId, userId);
 
