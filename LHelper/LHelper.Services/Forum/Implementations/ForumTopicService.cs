@@ -119,5 +119,32 @@
 
             await this.db.SaveChangesAsync();
         }
+
+
+        public async Task<TopicDeleteServiceModel> Delete(int id)
+        {
+            var result = new TopicDeleteServiceModel { };
+
+            var topic = await this.db
+               .Topics
+               .FindAsync(id);
+            
+            if (topic == null)
+            {
+                return result;
+            }
+
+            result.IsExist = true;
+            result.CategoryId = await this.db
+                .Topics
+                .Where(t => t.Id == id)
+                .Select(t => t.CategoryId)
+                .FirstOrDefaultAsync();
+
+            this.db.Topics.Remove(topic);
+            await this.db.SaveChangesAsync();
+
+            return result;
+        }
     }
 }

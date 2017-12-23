@@ -19,12 +19,13 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-md-2">@Model.Topic.PublishDate</div>
-                    <div class="col-md-3">@Model.Topic.Category</div>
-                    <div class="col-md-3">Отговори: @Model.Topic.Replies</div>
+                    <div class="col-md-2">@Model.Topic.Category</div>
+                    <div class="col-md-2">Отговори: @Model.Topic.Replies</div>
                     @if (User.IsInRole(WebConstants.TrainerRole) || User.IsInRole(WebConstants.AdministratorRole))
                     {
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <a asp-area="Forum" asp-controller="Topics" asp-action="Edit" asp-route-id="@Model.Topic.Id" class="btn btn-primary">Edit Topic</a>
+                            <a asp-area="Forum" asp-controller="Topics" asp-action="Delete" asp-route-id="@Model.Topic.Id" class="btn btn-primary">Delete Topic</a>
                         </div>
                     }
 

@@ -15,5 +15,7 @@
         Task<TopicEditServiceModel> ByIdForEditAsync(int id);
 
         Task EditAsync(int id, string title, string description, int categoryId);
+
+        Task<TopicDeleteServiceModel> Delete(int id);
     }
 }

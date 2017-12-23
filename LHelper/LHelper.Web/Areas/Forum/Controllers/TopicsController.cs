@@ -1,6 +1,7 @@
 ﻿namespace LHelper.Web.Areas.Forum.Controllers
 {
     using Data.Models;
+    using LHelper.Web.Controllers;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -103,6 +104,23 @@
 
             return RedirectToAction("Details", "Topics",
                         new { Area = "", id = id });
+        }
+
+        public IActionResult Delete(int id)
+            => View(id);
+
+        public async Task<IActionResult> Destroy(int id)
+        {
+           var result = await this.topics.Delete(id);
+
+            if (!result.IsExist)
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home", new { area = string.Empty });
+            }
+
+            return RedirectToAction("Details", "Categories",
+                         new { Area = "", id = result.CategoryId });
+
         }
 
 

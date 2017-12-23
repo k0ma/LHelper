@@ -1,0 +1,9 @@
+﻿@model int
+@{
+    ViewData["Title"] = "Delete Topic";
+}
+<h2>Сигурен ли сте, че искате да изтриете тази публикация, ако го направите, ще изтриете всички отговори в нея!</h2>
+
+<a asp-area="" asp-controller="Topics" asp-action="Details" asp-route-id="@Model" class="btn btn-default">Back</a>
+<a asp-controller="Topics" asp-action="Destroy" asp-route-id="@Model" class="btn btn-danger">Confirm Delete</a>
+
